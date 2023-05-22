@@ -8,7 +8,7 @@ const initialColumns = [
 const initialTasks = [
     { id: 1, name: 'Task1', idColumn: 2, user: 'Jarek' },
     { id: 2, name: 'Task2', idColumn: 3, user: 'Patryk' },
-
+    { id: 3, name: 'Task3', idColumn: 3, user: 'Patryk' },
 ];
 
 export { initialColumns, initialTasks };

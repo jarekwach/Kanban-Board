@@ -23,35 +23,61 @@ const App = function () {
     const [columns, setColumns] = useState(columnsFromLocalStorage);
     const [tasks, setTasks] = useState(tasksFromLocalStorage);
 
-    useEffect(() => {
-        setItem('columns', columns);
-        setItem('tasks', tasks);
-    });
+    // useEffect(() => {
+    //     setItem('columns', columns);
+    //     setItem('tasks', tasks);
+    // });
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    const handleLimitColumn = (idColumn) => {
+        const getColumnLimit = () => {
+            const columnLimit = columns.find((column) => column.id === idColumn);
+            return columnLimit.limit;
+        };
+
+        const getNumberOfTasksInColumn = () => {
+            const numberOfTasksInColumn = tasks.filter((task) => task.idColumn === idColumn);
+            return numberOfTasksInColumn.length;
+        };
+
+        if (getColumnLimit(idColumn) > getNumberOfTasksInColumn(idColumn)) {
+            return true;
+        }
+        return false;
+    };
 
     const moveLeft = useCallback(
         (id) => {
             const taskToUpdate = tasks.map((task) => {
                 if (id === task.id) {
-                    return { ...task, idColumn: task.idColumn - 1 };
+                    const prevColumn = task.idColumn - 1;
+
+                    if (task.idColumn > 1 && handleLimitColumn(prevColumn)) {
+                        return { ...task, idColumn: task.idColumn - 1 };
+                    }
                 }
                 return task;
             });
             setTasks(taskToUpdate);
         },
-        [tasks],
+        [tasks, handleLimitColumn],
     );
 
     const moveRight = useCallback(
         (id) => {
             const taskToUpdate = tasks.map((task) => {
                 if (id === task.id) {
-                    return { ...task, idColumn: task.idColumn + 1 };
+                    const nextColumn = task.idColumn + 1;
+
+                    if (task.idColumn < columns.length && handleLimitColumn(nextColumn)) {
+                        return { ...task, idColumn: task.idColumn + 1 };
+                    }
                 }
                 return task;
             });
             setTasks(taskToUpdate);
         },
-        [tasks],
+        [tasks, columns, handleLimitColumn],
     );
 
     const tasksOptions = useMemo(
