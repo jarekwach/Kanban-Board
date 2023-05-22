@@ -5,12 +5,22 @@ import { TasksContext } from '../context/context';
 
 const Column = function (props) {
     const { id, name, limit } = props;
-    const [...tasks] = useContext(TasksContext);
+    const { tasks, moveLeft, moveRight } = useContext(TasksContext);
 
     const taskList = tasks.map((task) => {
         // eslint-disable-next-line no-console
         if (id === task.idColumn) {
-            return <Task key={task.id} id={task.id} name={task.name} idColumn={task.idColumn} user={task.user} />;
+            return (
+                <Task
+                    key={task.id}
+                    id={task.id}
+                    name={task.name}
+                    idColumn={task.idColumn}
+                    user={task.user}
+                    moveLeft={moveLeft}
+                    moveRight={moveRight}
+                />
+            );
         }
         return null;
     });

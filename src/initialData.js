@@ -6,12 +6,9 @@ const initialColumns = [
 ];
 
 const initialTasks = [
-    { id: 1, name: 'Task1', idColumn: 1, user: 'Jarek' },
+    { id: 1, name: 'Task1', idColumn: 2, user: 'Jarek' },
     { id: 2, name: 'Task2', idColumn: 3, user: 'Patryk' },
-    { id: 3, name: 'Task3', idColumn: 1, user: 'Adam' },
-    { id: 4, name: 'Task4', idColumn: 2, user: 'Jan' },
-    { id: 5, name: 'Task5', idColumn: 4, user: 'Marek' },
-    { id: 6, name: 'Task6', idColumn: 3, user: 'Michał' },
+
 ];
 
 export { initialColumns, initialTasks };
