@@ -11,7 +11,7 @@ const Board = function () {
         return <Column key={id} name={name} id={id} limit={limit} />;
     });
 
-    return <section style={{ display: 'flex', justifyContent: 'space-evenly' }}>{columnList}</section>;
+    return <main style={{ display: 'flex', justifyContent: 'space-evenly' }}>{columnList}</main>;
 };
 
 export default Board;

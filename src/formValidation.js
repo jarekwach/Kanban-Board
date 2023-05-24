@@ -3,10 +3,10 @@ function formValidation(data, fields) {
 
     fields.forEach((field) => {
         const value = data[field.name];
-        const { name, label, required = true, pattern = null } = field;
+        const { name, label, required = true, pattern = null, type } = field;
 
         if (required) {
-            if (value.length < 2) {
+            if (value.length < 1) {
                 errors.push({
                     name,
                     message: `'${label}' is required.`,
@@ -17,6 +17,15 @@ function formValidation(data, fields) {
                     errors.push({
                         name,
                         message: `Invalid format in '${label}' `,
+                    });
+                }
+            }
+
+            if (type === 'number') {
+                if (Number.isNaN(Number(value))) {
+                    errors.push({
+                        name,
+                        message: `'${label}' must be a number.`,
                     });
                 }
             }

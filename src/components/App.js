@@ -7,6 +7,7 @@ import Form from './Form';
 import { initialColumns, initialTasks } from '../initialData';
 import { ColumnsContext, TasksContext } from '../context/context';
 import taskFormFields from '../taskFormFields';
+import columnFormFields from '../columnFormFields';
 import formValidation from '../formValidation';
 import useStorage from '../hooks';
 
@@ -25,7 +26,10 @@ const App = function () {
     }
     const [columns, setColumns] = useState(columnsFromLocalStorage);
     const [tasks, setTasks] = useState(tasksFromLocalStorage);
-    const [formErrors, setFormErrors] = useState([]);
+    const [taskFormErrors, setTaskFormErrors] = useState([]);
+    const [columnFormErrors, setColumnFormErrors] = useState([]);
+    const [taskFormDisplay, setTaskFormDisplay] = useState('none');
+    const [columnFormDisplay, setColumnFormDisplay] = useState('none');
 
     // useEffect(() => {
     //     setItem('columns', columns);
@@ -103,20 +107,79 @@ const App = function () {
         if (errors.length === 0) {
             if (handleLimitColumn(newTask.idColumn)) {
                 setTasks([...tasks, newTask]);
-                setFormErrors([]);
+                setTaskFormErrors([]);
                 taskName.value = '';
                 userName.value = '';
+                setTaskFormDisplay('none');
             }
         }
-        setFormErrors(errors);
+        setTaskFormErrors(errors);
+    };
+
+    const handleAddColumn = (e) => {
+        e.preventDefault();
+        const [columnName, columnLimit] = e.target.elements;
+        const nextId = columns.length + 1;
+        const newColumn = { id: nextId, name: columnName.value, limit: parseFloat(columnLimit.value) };
+        const errors = formValidation(newColumn, columnFormFields);
+
+        if (errors.length === 0) {
+            setColumns([...columns, newColumn]);
+            setColumnFormErrors([]);
+            columnName.value = '';
+            columnLimit.value = '';
+            setTaskFormDisplay('none');
+        }
+        setColumnFormErrors(errors);
     };
 
     return (
         <ColumnsContext.Provider value={columns}>
             <TasksContext.Provider value={tasksOptions}>
                 <section>
-                    <h1>Kanban Board</h1>
-                    <Form fields={taskFormFields} onSubmit={handleAddTask} formErrors={formErrors} />
+                    <header>
+                        <h1>Kanban Board</h1>
+                        <div>
+                            <button
+                                onClick={() => {
+                                    setTaskFormDisplay('block');
+                                    setColumnFormDisplay('none');
+                                    setTaskFormErrors([]);
+                                }}
+                                type="button"
+                            >
+                                New task
+                            </button>
+                            <button
+                                onClick={() => {
+                                    setTaskFormDisplay('none');
+                                    setColumnFormDisplay('block');
+                                    setColumnFormErrors([]);
+                                }}
+                                type="button"
+                            >
+                                New column
+                            </button>
+                        </div>
+                    </header>
+                    <section>
+                        <Form
+                            formName="Add task"
+                            fields={taskFormFields}
+                            onSubmit={handleAddTask}
+                            formErrors={taskFormErrors}
+                            display={taskFormDisplay}
+                            closeForm={() => setTaskFormDisplay('none')}
+                        />
+                        <Form
+                            formName="Add column"
+                            fields={columnFormFields}
+                            onSubmit={handleAddColumn}
+                            formErrors={columnFormErrors}
+                            display={columnFormDisplay}
+                            closeForm={() => setColumnFormDisplay('none')}
+                        />
+                    </section>
                     <Board />
                 </section>
             </TasksContext.Provider>

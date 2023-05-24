@@ -9,7 +9,7 @@ const Task = function (props) {
         <li>
             <header>
                 <p>{name}</p>
-                <p>{user}</p>
+                <p>Created by {user}</p>
             </header>
             <footer>
                 <button type="button" onClick={() => moveLeft(id)}>

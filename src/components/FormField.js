@@ -1,19 +1,15 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
-import PropTypes from 'prop-types';
 
 const FormField = function (props) {
-    const { name, label } = props;
+    const { name, label, error } = props;
 
     return (
         <div className="form__field">
             <input className="form__input" name={name} placeholder={label} />
+            <p className="form__error">{error}</p>
         </div>
     );
-};
-
-FormField.propTypes = {
-    name: PropTypes.string.isRequired,
-    label: PropTypes.string.isRequired,
 };
 
 export default FormField;
