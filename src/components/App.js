@@ -1,10 +1,13 @@
 /* eslint-disable no-unused-vars */
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import Board from './Board';
+import Form from './Form';
 
 // eslint-disable-next-line no-unused-vars
 import { initialColumns, initialTasks } from '../initialData';
 import { ColumnsContext, TasksContext } from '../context/context';
+import taskFormFields from '../taskFormFields';
+import formValidation from '../formValidation';
 import useStorage from '../hooks';
 
 const App = function () {
@@ -22,6 +25,7 @@ const App = function () {
     }
     const [columns, setColumns] = useState(columnsFromLocalStorage);
     const [tasks, setTasks] = useState(tasksFromLocalStorage);
+    const [formErrors, setFormErrors] = useState([]);
 
     // useEffect(() => {
     //     setItem('columns', columns);
@@ -89,11 +93,30 @@ const App = function () {
         [tasks, moveLeft, moveRight],
     );
 
+    const handleAddTask = (e) => {
+        e.preventDefault();
+        const [taskName, userName] = e.target.elements;
+        const nextId = tasks.length + 1;
+        const newTask = { id: nextId, name: taskName.value, idColumn: 1, user: userName.value };
+        const errors = formValidation(newTask, taskFormFields);
+
+        if (errors.length === 0) {
+            if (handleLimitColumn(newTask.idColumn)) {
+                setTasks([...tasks, newTask]);
+                setFormErrors([]);
+                taskName.value = '';
+                userName.value = '';
+            }
+        }
+        setFormErrors(errors);
+    };
+
     return (
         <ColumnsContext.Provider value={columns}>
             <TasksContext.Provider value={tasksOptions}>
                 <section>
                     <h1>Kanban Board</h1>
+                    <Form fields={taskFormFields} onSubmit={handleAddTask} formErrors={formErrors} />
                     <Board />
                 </section>
             </TasksContext.Provider>
