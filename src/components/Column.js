@@ -26,12 +26,12 @@ const Column = function (props) {
     });
 
     return (
-        <div id={id}>
-            <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <h2>{name}</h2>
-                <p>{limit}</p>
+        <div className='kanban__column column' id={id}>
+            <header className='column__header'>
+                <h2 className='column__title'>{name}</h2>
+                <p className='column__limit'>{limit}</p>
             </header>
-            <ul>{taskList}</ul>
+            <ul className='column__tasks task'>{taskList}</ul>
         </div>
     );
 };

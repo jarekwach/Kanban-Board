@@ -1,0 +1,169 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap');
+
+:root {
+    font-size: 62.5%;
+    background-color: #eeeeee;
+    --color-primary: #393e46;
+    --color-hover: #00adb5;
+    --color-white: #eeeeee;
+    --color-column: #393e46;
+}
+
+body {
+    font-family: 'Lato', sans-serif;
+}
+
+.kanban {
+    height: 100vh;
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    margin: 1rem;
+    padding: 1rem;
+
+    &__title {
+        font-weight: bold;
+        font-size: 4rem;
+        color: var(--color-primary);
+    }
+
+    &__buttons {
+        display: flex;
+        width: 30%;
+        justify-content: space-evenly;
+        align-items: center;
+    }
+
+    &__btn {
+        width: 40%;
+        height: 80%;
+        border: none;
+        border-radius: 8px;
+        transition: all 0.3s;
+        background-color: var(--color-primary);
+        color: var(--color-white);
+
+        &:hover {
+            background-color: var(--color-hover);
+        }
+    }
+}
+
+.kanban__form {
+    display: flex;
+    position: absolute;
+    right: 40px;
+    background-color: #fff;
+    justify-content: flex-end;
+    align-items: flex-end;
+    border-radius: 8px;
+    box-shadow: 0 0 15px black;
+}
+
+.form {
+    &__item {
+        margin: 2rem;
+        padding: 1rem;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-around;
+        width: 260px;
+    }
+
+    &__title {
+        font-size: 2rem;
+    }
+
+    &__input {
+        margin: 0.5rem;
+        padding: 5px;
+        font-size: 1.4rem;
+    }
+
+    &__buttons {
+        margin: 1rem;
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+    }
+
+    &__btn {
+        padding: 1rem;
+        border: none;
+        border-radius: 8px;
+        transition: all 0.3s;
+        background-color: var(--color-primary);
+        color: var(--color-white);
+        font-size: 1.4rem;
+
+        &:hover {
+            background-color: var(--color-hover);
+        }
+    }
+
+    &__error {
+        color: red;
+        font-size: 1.4rem;
+    }
+}
+
+.kanban__board {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.kanban__column {
+    margin: 1rem;
+    padding: 1rem;
+    border: 1px solid var(--color-primary);
+    border-radius: 8px;
+    width: 25%;
+    min-height: 400px;
+}
+
+.column {
+    &__header {
+        display: flex;
+        justify-content: space-between;
+        font-size: 2.4rem;
+        border-bottom: 1px solid var(--color-primary);
+    }
+}
+
+.task {
+    &__item {
+        margin: 1rem;
+        padding: 1rem;
+        border-radius: 8px;
+        border: 1px solid var(--color-primary);
+        background-color: white;
+    }
+
+    &__name {
+        font-size: 1.8rem;
+    }
+
+    &__buttons {
+        margin: 1rem;
+        display: flex;
+        justify-content: space-around;
+    }
+
+    &__btn {
+        width: 50px;
+        padding: 0.5rem;
+        background-color: var(--color-primary);
+        color: var(--color-white);
+        border: none;
+        border-radius: 8px;
+
+        &:hover {
+            background-color: var(--color-hover);
+        }
+    }
+}

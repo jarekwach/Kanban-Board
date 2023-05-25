@@ -2,14 +2,14 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import Board from './Board';
 import Form from './Form';
-
-// eslint-disable-next-line no-unused-vars
 import { initialColumns, initialTasks } from '../initialData';
 import { ColumnsContext, TasksContext } from '../context/context';
 import taskFormFields from '../taskFormFields';
 import columnFormFields from '../columnFormFields';
 import formValidation from '../formValidation';
 import useStorage from '../hooks';
+import '../styles/css/reset.css'
+import '../styles/css/main.css';
 
 const App = function () {
     const [getItem, setItem] = useStorage();
@@ -31,10 +31,10 @@ const App = function () {
     const [taskFormDisplay, setTaskFormDisplay] = useState('none');
     const [columnFormDisplay, setColumnFormDisplay] = useState('none');
 
-    // useEffect(() => {
-    //     setItem('columns', columns);
-    //     setItem('tasks', tasks);
-    // });
+    useEffect(() => {
+        setItem('columns', columns);
+        setItem('tasks', tasks);
+    });
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
     const handleLimitColumn = (idColumn) => {
@@ -128,7 +128,7 @@ const App = function () {
             setColumnFormErrors([]);
             columnName.value = '';
             columnLimit.value = '';
-            setTaskFormDisplay('none');
+            setColumnFormDisplay('none');
         }
         setColumnFormErrors(errors);
     };
@@ -136,13 +136,14 @@ const App = function () {
     return (
         <ColumnsContext.Provider value={columns}>
             <TasksContext.Provider value={tasksOptions}>
-                <section>
-                    <header>
-                        <h1>Kanban Board</h1>
-                        <div>
+                <section className="kanban">
+                    <header className="kanban__header header">
+                        <h1 className="header__title">Kanban Board</h1>
+                        <div className="header__buttons">
                             <button
+                                className="header__btn"
                                 onClick={() => {
-                                    setTaskFormDisplay('block');
+                                    setTaskFormDisplay('flex');
                                     setColumnFormDisplay('none');
                                     setTaskFormErrors([]);
                                 }}
@@ -151,9 +152,10 @@ const App = function () {
                                 New task
                             </button>
                             <button
+                                className="header__btn"
                                 onClick={() => {
                                     setTaskFormDisplay('none');
-                                    setColumnFormDisplay('block');
+                                    setColumnFormDisplay('flex');
                                     setColumnFormErrors([]);
                                 }}
                                 type="button"
@@ -162,7 +164,7 @@ const App = function () {
                             </button>
                         </div>
                     </header>
-                    <section>
+                    <section className='kanban__form'>
                         <Form
                             formName="Add task"
                             fields={taskFormFields}

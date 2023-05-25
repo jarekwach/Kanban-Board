@@ -6,16 +6,16 @@ const Task = function (props) {
     const { id, name, idColumn, user, moveLeft, moveRight } = props;
 
     return (
-        <li>
-            <header>
-                <p>{name}</p>
-                <p>Created by {user}</p>
+        <li className="task__item">
+            <header className="task__header">
+                <p className="task__name">{name}</p>
+                <p className="task__author">Created by {user}</p>
             </header>
-            <footer>
-                <button type="button" onClick={() => moveLeft(id)}>
+            <footer className="task__buttons">
+                <button className=" task__btn task__btn--left" type="button" onClick={() => moveLeft(id)}>
                     left
                 </button>
-                <button type="button" onClick={() => moveRight(id)}>
+                <button className="task__btn task__btn--right" type="button" onClick={() => moveRight(id)}>
                     right
                 </button>
             </footer>

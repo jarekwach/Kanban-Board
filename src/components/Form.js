@@ -19,12 +19,12 @@ const Form = function (props) {
     });
 
     return (
-        <form style={{ display }} onSubmit={onSubmit}>
-            <h2>{formName}</h2>
+        <form className='form__item' style={{ display }} onSubmit={onSubmit}>
+            <h2 className='form__title'>{formName}</h2>
             {fieldList}
-            <div>
-                <input type="submit" value={formName} />
-                <button type="button" onClick={closeForm}>
+            <div className='form__buttons'>
+                <input className='form__btn form__btn--submit' type="submit" value={formName} />
+                <button className='form__btn' type="button" onClick={closeForm}>
                     close
                 </button>
             </div>

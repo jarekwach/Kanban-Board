@@ -11,7 +11,7 @@ const Board = function () {
         return <Column key={id} name={name} id={id} limit={limit} />;
     });
 
-    return <main style={{ display: 'flex', justifyContent: 'space-evenly' }}>{columnList}</main>;
+    return <main className="kanban__board">{columnList}</main>;
 };
 
 export default Board;
