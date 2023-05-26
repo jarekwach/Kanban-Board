@@ -2,16 +2,17 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import Board from './Board';
 import Form from './Form';
+import Modal from './Modal';
 import { initialColumns, initialTasks } from '../initialData';
 import { ColumnsContext, TasksContext } from '../context/context';
 import taskFormFields from '../taskFormFields';
 import columnFormFields from '../columnFormFields';
 import formValidation from '../formValidation';
 import useStorage from '../hooks';
-import '../styles/css/reset.css'
+import '../styles/css/reset.css';
 import '../styles/css/main.css';
 
-const App = function () {
+const Kanban = function () {
     const [getItem, setItem] = useStorage();
 
     const columnsFromLocalStorage = getItem('columns');
@@ -30,6 +31,7 @@ const App = function () {
     const [columnFormErrors, setColumnFormErrors] = useState([]);
     const [taskFormDisplay, setTaskFormDisplay] = useState('none');
     const [columnFormDisplay, setColumnFormDisplay] = useState('none');
+    const [limitError, setLimitError] = useState(false);
 
     useEffect(() => {
         setItem('columns', columns);
@@ -51,6 +53,8 @@ const App = function () {
         if (getColumnLimit(idColumn) > getNumberOfTasksInColumn(idColumn)) {
             return true;
         }
+
+        setLimitError(true);
         return false;
     };
 
@@ -112,6 +116,7 @@ const App = function () {
                 userName.value = '';
                 setTaskFormDisplay('none');
             }
+            setTaskFormDisplay('none');
         }
         setTaskFormErrors(errors);
     };
@@ -131,6 +136,13 @@ const App = function () {
             setColumnFormDisplay('none');
         }
         setColumnFormErrors(errors);
+    };
+
+    const renderLimitError = () => {
+        if (limitError) {
+            return <Modal onClose={() => setLimitError(false)} text="Colum is full!" />;
+        }
+        return null;
     };
 
     return (
@@ -164,7 +176,7 @@ const App = function () {
                             </button>
                         </div>
                     </header>
-                    <section className='kanban__form'>
+                    <section className="kanban__form">
                         <Form
                             formName="Add task"
                             fields={taskFormFields}
@@ -183,10 +195,11 @@ const App = function () {
                         />
                     </section>
                     <Board />
+                    {renderLimitError()}
                 </section>
             </TasksContext.Provider>
         </ColumnsContext.Provider>
     );
 };
 
-export default App;
+export default Kanban;

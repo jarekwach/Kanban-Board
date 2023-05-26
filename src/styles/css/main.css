@@ -41,7 +41,7 @@ body {
   height: 80%;
   border: none;
   border-radius: 8px;
-  transition: all 0.3s;
+  transition: background-color 0.3s;
   background-color: var(--color-primary);
   color: var(--color-white);
 }
@@ -86,7 +86,7 @@ body {
   padding: 1rem;
   border: none;
   border-radius: 8px;
-  transition: all 0.3s;
+  transition: background-color 0.3s;
   background-color: var(--color-primary);
   color: var(--color-white);
   font-size: 1.4rem;
@@ -129,6 +129,12 @@ body {
 }
 .task__name {
   font-size: 1.8rem;
+  margin-bottom: 1rem;
+}
+.task__author {
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+  text-align: right;
 }
 .task__buttons {
   margin: 1rem;
@@ -144,5 +150,43 @@ body {
   border-radius: 8px;
 }
 .task__btn:hover {
+  background-color: var(--color-hover);
+}
+
+.modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 100px;
+  width: 100%;
+}
+.modal__item {
+  display: flex;
+  margin: 2rem;
+  padding: 1rem;
+  flex-direction: column;
+  align-items: center;
+  width: 300px;
+  height: 200px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 15px black;
+}
+.modal__text {
+  font-size: 2.4rem;
+  margin-top: 50px;
+}
+.modal__btn {
+  font-size: 1.6rem;
+  margin-left: 250px;
+  border: none;
+  border-radius: 8px;
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  transition: background-color 0.3s;
+  padding: 0.5rem 1rem;
+}
+.modal__btn:hover {
   background-color: var(--color-hover);
 }/*# sourceMappingURL=main.css.map */

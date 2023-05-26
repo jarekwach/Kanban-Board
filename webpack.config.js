@@ -3,12 +3,12 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
 
 module.exports = {
-    entry: './src/app.js',
+    entry: './src/index.js',
     mode: 'development',
 
     output: {
         path: path.resolve(__dirname, 'build'),
-        filename: 'app.min.js',
+        filename: 'app.index.js',
     },
     devtool: 'inline-source-map',
     module: {
