@@ -125,11 +125,11 @@ const Kanban = function () {
         e.preventDefault();
         const [columnName, columnLimit] = e.target.elements;
         const nextId = columns.length + 1;
-        const newColumn = { id: nextId, name: columnName.value, limit: parseFloat(columnLimit.value) };
+        const newColumn = { id: nextId, name: columnName.value, limit: columnLimit.value };
         const errors = formValidation(newColumn, columnFormFields);
 
         if (errors.length === 0) {
-            setColumns([...columns, newColumn]);
+            setColumns([...columns, { ...newColumn, limit: parseFloat(columnLimit.value) }]);
             setColumnFormErrors([]);
             columnName.value = '';
             columnLimit.value = '';
