@@ -1,9 +1,16 @@
-const useStorage = () => {
-    const getItem = (name) => JSON.parse(window.localStorage.getItem(name));
-    const setItem = (name, data) => window.localStorage.setItem(name, JSON.stringify(data));
-    // const removeItem = () => window.localStorage.removeItem(name);
+import { useState, useEffect } from 'react';
 
-    return [getItem, setItem];
+const useStorage = (key, initialValue) => {
+    const [value, setValue] = useState(() => {
+        const storedValue = window.localStorage.getItem(key);
+        return storedValue ? JSON.parse(storedValue) : initialValue;
+    });
+
+    useEffect(() => {
+        window.localStorage.setItem(key, JSON.stringify(value));
+    }, [key, value]);
+
+    return [value, setValue];
 };
 
 export default useStorage;

@@ -13,30 +13,13 @@ import '../styles/css/reset.css';
 import '../styles/css/main.css';
 
 const Kanban = function () {
-    const [getItem, setItem] = useStorage();
-
-    const columnsFromLocalStorage = getItem('columns');
-    const tasksFromLocalStorage = getItem('tasks');
-
-    if (columnsFromLocalStorage === null) {
-        setItem('columns', initialColumns);
-    }
-
-    if (tasksFromLocalStorage === null) {
-        setItem('tasks', initialTasks);
-    }
-    const [columns, setColumns] = useState(columnsFromLocalStorage);
-    const [tasks, setTasks] = useState(tasksFromLocalStorage);
+    const [columns, setColumns] = useStorage('columns', initialColumns);
+    const [tasks, setTasks] = useStorage('tasks', initialTasks);
     const [taskFormErrors, setTaskFormErrors] = useState([]);
     const [columnFormErrors, setColumnFormErrors] = useState([]);
     const [taskFormDisplay, setTaskFormDisplay] = useState('none');
     const [columnFormDisplay, setColumnFormDisplay] = useState('none');
     const [limitError, setLimitError] = useState(false);
-
-    useEffect(() => {
-        setItem('columns', columns);
-        setItem('tasks', tasks);
-    });
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
     const handleLimitColumn = (idColumn) => {
@@ -72,7 +55,7 @@ const Kanban = function () {
             });
             setTasks(taskToUpdate);
         },
-        [tasks, handleLimitColumn],
+        [tasks, setTasks, handleLimitColumn],
     );
 
     const moveRight = useCallback(
@@ -89,7 +72,7 @@ const Kanban = function () {
             });
             setTasks(taskToUpdate);
         },
-        [tasks, columns, handleLimitColumn],
+        [tasks, setTasks, columns, handleLimitColumn],
     );
 
     const tasksOptions = useMemo(
