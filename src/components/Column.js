@@ -8,7 +8,6 @@ const Column = function (props) {
     const { tasks, moveLeft, moveRight } = useContext(TasksContext);
 
     const taskList = tasks.map((task) => {
-        // eslint-disable-next-line no-console
         if (id === task.idColumn) {
             return (
                 <Task
@@ -26,12 +25,12 @@ const Column = function (props) {
     });
 
     return (
-        <div className='kanban__column column' id={id}>
-            <header className='column__header'>
-                <h2 className='column__title'>{name}</h2>
-                <p className='column__limit'>{limit}</p>
+        <div className="kanban__column column" id={id}>
+            <header className="column__header">
+                <h2 className="column__title">{name}</h2>
+                <p className="column__limit">{limit}</p>
             </header>
-            <ul className='column__tasks task'>{taskList}</ul>
+            <ul className="column__tasks task">{taskList}</ul>
         </div>
     );
 };

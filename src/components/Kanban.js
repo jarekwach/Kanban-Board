@@ -1,14 +1,13 @@
-/* eslint-disable no-unused-vars */
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import Board from './Board';
 import Form from './Form';
 import Modal from './Modal';
-import { initialColumns, initialTasks } from '../initialData';
+import { initialColumns, initialTasks } from '../data/initialData';
 import { ColumnsContext, TasksContext } from '../context/context';
-import taskFormFields from '../taskFormFields';
-import columnFormFields from '../columnFormFields';
-import formValidation from '../formValidation';
-import useStorage from '../hooks';
+import taskFormFields from '../data/taskFormFields';
+import columnFormFields from '../data/columnFormFields';
+import formValidation from '../helpers/formValidation';
+import useStorage from '../helpers/hooks';
 import '../styles/css/reset.css';
 import '../styles/css/main.css';
 
