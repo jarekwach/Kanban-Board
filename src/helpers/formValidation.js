@@ -9,7 +9,7 @@ function formValidation(data, fields) {
             if (value.length < 1) {
                 errors.push({
                     name,
-                    message: `'${label}' is required.`,
+                    message: `${label} is required.`,
                 });
             }
         }
@@ -19,7 +19,7 @@ function formValidation(data, fields) {
             if (!reg.test(value)) {
                 errors.push({
                     name,
-                    message: `Invalid format in '${label}' `,
+                    message: `Invalid format in ${label}`,
                 });
             }
         }
@@ -28,7 +28,7 @@ function formValidation(data, fields) {
             if (Number.isNaN(Number(value))) {
                 errors.push({
                     name,
-                    message: `'${label}' must be a number.`,
+                    message: `${label} must be a number.`,
                 });
             }
         }
