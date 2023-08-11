@@ -1,17 +1,19 @@
+![Kanban Board](./assets/kanban-board.gif)
+
 # Kanban Board
 
 See the live version of [Kanban Board](https://jarekwach.github.io/Kanban-Board/build/).
 
-Kanban Board is a project of a table similar to a kanban tool, used to visualize the flow of tasks. The project uses functional components, hooks and context.
+Kanban Board is a project of a table similar to a kanban tool, used to visualize the flow of tasks. The project uses functional components, hooks, and context.
 
 **Main features**:
 
-- Adding new tasks 
-- Adding new columns and setting a task limit in a column
-- Validation of forms for adding tasks and columns
-- Saving application data in localStorage
-- Moving tasks between columns
-- Blocking of adding / moving tasks when the column has reached the limit
+-   Adding new tasks
+-   Adding new columns and setting a task limit in a column
+-   Validation of forms for adding tasks and columns
+-   Saving application data in localStorage
+-   Moving tasks between columns
+-   Blocking of adding / moving tasks when the column has reached the limit
 
 &nbsp;
 
@@ -30,6 +32,14 @@ Kanban Board is a project of a table similar to a kanban tool, used to visualize
 ![Prettier](https://img.shields.io/badge/prettier-1A2C34?style=for-the-badge&logo=prettier&logoColor=F7BA3E)
 ![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
 ![NPM](https://img.shields.io/badge/npm-CB3837?style=for-the-badge&logo=npm&logoColor=white)
+
+&nbsp;
+
+## Future plans
+
+-   Deleting tasks and columns
+-   Changing the look of the application
+-   Version for phones and tablets
 
 &nbsp;
 
